@@ -13,7 +13,7 @@ export interface Env {
   OPENAI_PROMPT_VERSION?: string;
 
   // ElevenLabs
-  ELEVENLABS_API_KEY:       string;
+  ELEVENLABS_API_KEY:        string;
   ELEVENLABS_VOICE_NARRATOR: string;
   ELEVENLABS_VOICE_SOPHIE:   string;
   ELEVENLABS_VOICE_MARC:     string;
@@ -36,12 +36,19 @@ const ALLOWED_ORIGINS = [
   "https://app.gofrench.com",
 ];
 
+// Return the exact request origin if it's in our allowlist.
+// This avoids trailing-slash or casing mismatches that fail browser preflight checks.
 function corsHeaders(origin: string | null): Record<string, string> {
-  const allowed = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  const allowed =
+    origin && ALLOWED_ORIGINS.some(o => o === origin)
+      ? origin
+      : ALLOWED_ORIGINS[0];
   return {
     "Access-Control-Allow-Origin":  allowed,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, X-Internal-Key",
+    "Access-Control-Max-Age":       "86400",
+    "Vary":                         "Origin",
   };
 }
 
@@ -50,7 +57,7 @@ export default {
     const origin = request.headers.get("Origin");
     const cors   = corsHeaders(origin);
 
-    // Handle CORS preflight
+    // Handle CORS preflight — must be before everything else
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: cors });
     }
