@@ -1,0 +1,25 @@
+name = "gofrench-worker"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Fill this in after running: npx wrangler whoami
+account_id = "7e2e498328ce80879d26455919e3a5a6"
+
+# All secrets go in Cloudflare dashboard → Workers → gofrench-worker → Settings → Variables
+# Do NOT put real values here. Add these as secrets in the dashboard:
+#   OPENAI_API_KEY
+#   OPENAI_PROMPT_ID
+#   OPENAI_PROMPT_VERSION        (optional)
+#   ELEVENLABS_API_KEY
+#   ELEVENLABS_VOICE_NARRATOR
+#   ELEVENLABS_VOICE_SOPHIE
+#   ELEVENLABS_VOICE_MARC
+#   ELEVENLABS_VOICE_CLAIRE
+#   ELEVENLABS_VOICE_THOMAS
+#   R2_ACCOUNT_ID
+#   R2_ACCESS_KEY_ID
+#   R2_SECRET_ACCESS_KEY
+#   R2_BUCKET_NAME
+#   R2_PUBLIC_URL
+#   INTERNAL_SECRET              (any random string — admin portal sends this header)
