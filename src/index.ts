@@ -32,8 +32,8 @@ export interface Env {
 }
 
 const ALLOWED_ORIGINS = [
-  "https://admin.gofrench.com",
-  "https://app.gofrench.com",
+  "https://admin.gofrench-academy.com",
+  "https://app.gofrench-academy.com",
 ];
 
 // Return the exact request origin if it's in our allowlist.
